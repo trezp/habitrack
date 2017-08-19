@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.table-container {
+  max-width: 60%; 
+  margin: auto;
+  height: 75px;
+}
+
+table {
+  padding: 10px;
+  text-align: left;
+}
+td, th {
+  width: 30%;
+}
+
+.input-goal input {
+  width: 30px;
+}
+
+button {
+  border: none;
+  background: #0A9D0D;
+  width: 100px;
+  color: white;
+  font-size: 1.2em;
+}
+
+button:hover {
+  background: #117512;
+}
