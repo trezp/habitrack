@@ -9,6 +9,92 @@ import './App.css';
 //Make HabitRow component 
 //Make component where you can add and delete HabitRows
 
+class TextFieldEditor extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      editModeOn: false,
+      num: "Click to Add"
+    }
+  }
+
+  handleUpdate = (event) => {
+    if(event.keyCode === 13){
+      const currentValue = event.target.value;
+      this.setState({
+        num : currentValue,
+        editModeOn: false
+      });
+    }
+  }
+
+  turnEditModeOn = () =>{
+    this.setState({editModeOn: true});
+  }
+
+  turnEditModeOff = () => {
+    this.setState({editModeOn: false});
+  }
+
+  render(){
+    return (
+      <div>
+        {this.state.editModeOn === true ? 
+          <input 
+            type="text" 
+            onKeyDown={this.handleUpdate}></input> 
+          :
+          <span onClick={this.turnEditModeOn}>{this.state.num}</span>
+        }
+      </div>
+    )
+  }
+}
+
+class HabitRow extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      increment: 0
+    }
+
+  }
+
+  incrementNum = () => { 
+    this.setState( (props) =>{
+      return {increment : this.state.increment + 1}
+    });
+  }
+
+  render() {
+    return (
+      <div className="table-container">
+      <table className="main-table">
+        <tbody>
+          <tr>
+            <th>Habit</th>
+            <th>Goal</th>
+            <th>Done It</th>
+          </tr>
+          <tr>
+            <td><TextFieldEditor/></td>
+            <td className="input-goal">
+              <TextFieldEditor/>
+            </td>
+            <td>{this.state.increment}</td>
+            <td>
+              <button 
+                onClick={this.incrementNum}
+                className="button">I did it!
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    );
+  }
+}
 class App extends Component {
   constructor(props){
     super(props);
@@ -20,13 +106,6 @@ class App extends Component {
     }
 
   }
-  
-  componentDidMount(){
-    const formId = "form" + this.state.formId;
-    const goalNum = "goal" + this.state.goalId;
-    document.getElementById(formId).style.display = "none";
-    document.getElementById(goalNum).style.display = "table";
-  }
 
   incrementNum = () => { 
     this.setState( (props) =>{
@@ -34,58 +113,13 @@ class App extends Component {
     });
   }
 
-  updateGoal = (event) => {
-    const formId = "form" + this.state.formId;
-    const goalNum = "goal" + this.state.goalId;
-  
-    if(event.keyCode === 13){
-      const currentValue = event.target.value;
-      this.setState({goal : currentValue});
-      document.getElementById(formId).style.display = "none";
-      document.getElementById(goalNum).style.display = "table";
-    }
-  }
-
-  toggleEditMode = () => {
-    const input = "form" + this.state.formId;
-    const goalNum = "goal" + this.state.goalId;
-    document.getElementById(goalNum).style.display = "none";
-    document.getElementById(input).style.display = "inline-block";
-  }
-
 
   render() {
     return (
       <div className="App">
         <h1>Habitrack</h1>
-        <div className="table-container">
-          <table className="main-table">
-            <tbody>
-              <tr>
-                <th>Habit</th>
-                <th>Goal</th>
-                <th>Done It</th>
-              </tr>
-              <tr>
-                <td>Avoid Sweets</td>
-                <td className="input-goal">
-                  <input id={"form" + this.state.formId} type="text" onKeyDown={this.updateGoal}></input>
-                  <span 
-                    id={"goal" + this.state.goalId}
-                    onClick={this.toggleEditMode}>{this.state.goal}</span>
-                </td>
-                <td>{this.state.increment}</td>
-                <td>
-                  <button 
-                    onClick={this.incrementNum}
-                    className="button">I did it!
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-         
-        </div>
+        <HabitRow/>
+        <HabitRow/>
       </div>
     );
   }
