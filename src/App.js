@@ -2,37 +2,45 @@ import React, { Component } from 'react';
 import './App.css';
 import HabitTracker from './HabitTracker';
 
-// State should also toggle on tab
-//Row changes color when Goal === Done It 
-//TODO Create component that toggles between an edit mode and display mode
-//TODO Use component for Habit and Goal 
-//Make HabitRow component 
-//Make component where you can add and delete HabitRows
+// Add and delete habits 
+  // Make ghost tile for adding a habit 
+// Goal should be X times per time period
+// Make input fields prettier 
+// "Last achieved" stamp
+// Habit tile color coding
+  // Based on "Last achieved" stamp
+// Data should persist
+// Draw a check mark when completed a goal
+// Drag and Drop 
 
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      increment: 0,
-      goal: 0
+      numOfHabitTrackers: 0,
+      habitTrackers : []
     }
   }
 
-  incrementNum = () => { 
-    this.setState( (props) =>{
-      return {increment : this.state.increment + 1}
-    });
+  handleAdd = () => { 
+    this.state.habitTrackers.push(<HabitTracker/>)
+    this.setState({numOfHabitTrackers: this.state.numOfHabitTrackers + 1})
   }
 j
   render() {
     return (
       <div className="main-container">
         <h1>Habitrack</h1>
-        <div className="flex-container">
-          <HabitTracker/>
-          <HabitTracker/>
-          <HabitTracker/>
+        <div id="habit-container" className="flex-container">
+            {this.state.habitTrackers.map((habitTracker)=>{
+              return habitTracker;
+            })}
+          <div 
+            className="tile" onClick={this.handleAdd}>
+            Add New Goal 
+            <span className="add"> + </span> 
+          </div>
         </div>
       </div>
     );

@@ -10,7 +10,7 @@ import './index.css';
         increment: 0
       }
     }
-  
+    
     incrementNum = () => { 
       this.setState( (props) =>{
         return {increment : this.state.increment + 1}
@@ -19,7 +19,7 @@ import './index.css';
   
     render() {
       return (
-          <table className="goal-tile">
+          <table className="tile">
             <thead>
               <tr>
                 <th scope="column"><TextFieldEditor/></th>
