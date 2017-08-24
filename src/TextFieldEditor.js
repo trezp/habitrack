@@ -5,7 +5,7 @@ class TextFieldEditor extends Component {
       super(props);
       this.state = {
         editModeOn: false,
-        text: "Add a Habit"
+        text: this.props.text
       }
     }
   
