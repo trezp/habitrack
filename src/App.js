@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   handleAdd = () => { 
-    this.state.habitTrackers.push(<HabitTracker/>)
+    this.state.habitTrackers.push(<HabitTracker key={this.state.numOfHabitTrackers}/>)
     this.setState({numOfHabitTrackers: this.state.numOfHabitTrackers + 1})
   }
 j
