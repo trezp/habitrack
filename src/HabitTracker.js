@@ -15,7 +15,7 @@ import './index.css';
     }
     
     incrementNum = (event) => { 
-      console.log(event.target.parentNode.parentNode)
+      console.log("this is only a test")
       if(event.target.className === "button"){
         const tile = event.target.parentNode.parentNode;
         if(this.state.num === this.state.increment + 1) {
